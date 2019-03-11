@@ -42,9 +42,9 @@
             android:layout_height="100dp">
 
             <TextView
+                android:id="@+id/p1sc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="150"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
             <TextView
@@ -63,9 +63,9 @@
             android:layout_height="100dp">
 
             <TextView
+                android:id="@+id/p2sc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="19"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
             <TextView
@@ -84,15 +84,15 @@
             android:layout_height="100dp">
 
             <TextView
+                android:id="@+id/p3sc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Numbers"
+                android:text="Player 3"
                 android:textSize="18sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
