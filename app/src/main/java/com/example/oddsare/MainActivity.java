@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     editText.setText("");
+                    button.setVisibility(View.GONE);
                 }
             }
         });
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txtclose;
         final Button btnPlay;
         myDialog.setContentView(R.layout.playpopup);
-        textic = (TextView) findViewById(R.id.textView2);
+        textic = (TextView) myDialog.findViewById(R.id.textView2);
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
         btnPlay = (Button) myDialog.findViewById(R.id.btnplay);
@@ -103,14 +105,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                textic.setText(Long.toString(millisUntilFinished/1000));
+                textic.setText(String.format(Locale.getDefault(),"%s", Long.toString(millisUntilFinished/1000)));
             }
 
             @Override
             public void onFinish() {
             }
         };
-        textic.setText(Long.toString(countDown/1000));
+        textic.setText(String.format(Locale.getDefault(),"%s",Long.toString(countDown/1000)));
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
