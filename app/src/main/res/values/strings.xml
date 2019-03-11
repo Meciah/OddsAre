@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OddsAre</string>
+    <string name="title_activity_player2">Player2</string>
+    <string name="edit_message">Enter a number</string>
+    <string name="Player_count">Number of Players</string>
+    <string name="play_game">Play</string>
+</resources>
