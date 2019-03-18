@@ -1,6 +1,8 @@
 package com.example.oddsare;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,10 +28,14 @@ public class MainActivity extends AppCompatActivity {
     int result;
     Dialog myDialog;
     EditText pcount;
+    EditText p1editText;
+    EditText p2editText;
+    EditText p3editText;
     EditText editText;
     ArrayList<Integer> plcount = new ArrayList<Integer>();
     ArrayList<Integer> odds = new ArrayList<Integer>();
-    int cc=0;
+    int cc = 0;
+    int popc = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,35 +43,128 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myDialog = new Dialog(this);
 
-        pcount = findViewById(R.id.editTextpl);
-        editText = findViewById(R.id.editText);
+        final AlertDialog.Builder p3builder = new AlertDialog.Builder(this);
+        p3builder.setTitle("Player 3");
+        p3builder.setIcon(R.drawable.ic_launcher_background);
+        p3builder.setMessage("Enter a Number");
 
-        final Button pcbutton = findViewById(R.id.playerbtn);
-        pcbutton.setOnClickListener(new View.OnClickListener() {
+        p3editText = new EditText(this);
+        p3builder.setView(p3editText);
+
+        p3builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                plcount.add(Integer.valueOf(pcount.getText().toString()));
-                pcount.setText("");
-                pcbutton.setVisibility(View.GONE);
-                pcount.setVisibility(View.GONE);
+            public void onClick(DialogInterface dialog, int which) {
+                odds.add(Integer.valueOf(p3editText.getText().toString()));
+                dialog.dismiss();
             }
         });
+
+        p3builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                recreate();
+            }
+        });
+
+        final AlertDialog.Builder p2builder = new AlertDialog.Builder(this);
+        p2builder.setTitle("Player 2");
+        p2builder.setIcon(R.drawable.ic_launcher_background);
+        p2builder.setMessage("Enter a Number");
+
+        p2editText = new EditText(this);
+        p2builder.setView(p2editText);
+
+        p2builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                odds.add(Integer.valueOf(p2editText.getText().toString()));
+                if (plcount.get(0) < 4 && plcount.get(0) > 2) {
+                    p3builder.create().show();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        p2builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                recreate();
+            }
+        });
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Player 1");
+        builder.setIcon(R.drawable.ic_launcher_background);
+        builder.setMessage("Enter a Number");
+
+        p1editText = new EditText(this);
+        builder.setView(p1editText);
+
+        builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                odds.add(Integer.valueOf(p1editText.getText().toString()));
+                p2builder.create().show();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                recreate();
+            }
+        });
+
+        AlertDialog.Builder builderpc = new AlertDialog.Builder(this);
+        builderpc.setTitle("Number of Players");
+        builderpc.setIcon(R.drawable.ic_launcher_background);
+        builderpc.setMessage("2-5");
+        pcount = new EditText(this);
+        builderpc.setView(pcount);
+
+        builderpc.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                plcount.add(Integer.valueOf(pcount.getText().toString()));
+                builder.create().show();
+                dialog.dismiss();
+            }
+        });
+
+        builderpc.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                recreate();
+            }
+        });
+
+
+
+        AlertDialog pc = builderpc.create();
+        pc.show();
+
+
 
         final Button button = findViewById(R.id.mainbtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cc=cc+1;
-                if(cc == plcount.get(0)){
+                cc = cc + 1;
+                if (cc == plcount.get(0)) {
                     button.setVisibility(View.GONE);
                     editText.setVisibility(View.GONE);
-                }else{}
+                } else {
+                }
 
-                if(cc != plcount.get(0)+1) {
+                if (cc != plcount.get(0) + 1) {
                     odds.add(Integer.valueOf(editText.getText().toString()));
                     editText.setText("");
-                }
-                else{
+                } else {
                     editText.setText("");
                 }
             }
@@ -84,10 +183,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void showToast(String text){
+    private void showToast(String text) {
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
     }
-
 
 
     public void ShowPopup(View v) {
@@ -120,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         p5score = (TextView) myDialog.findViewById(R.id.p5sc);
         p6score = (TextView) myDialog.findViewById(R.id.p6sc);
         textic = (TextView) myDialog.findViewById(R.id.textView2);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+        txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("X");
         btnPlay = (Button) myDialog.findViewById(R.id.btnplay);
         txtclose.setOnClickListener(new View.OnClickListener() {
@@ -131,21 +229,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(plcount.get(0) < 3){
+        if (plcount.get(0) < 3) {
             p3layout.setVisibility(View.GONE);
             p4layout.setVisibility(View.GONE);
             p5layout.setVisibility(View.GONE);
             p6layout.setVisibility(View.GONE);
-        }else if (plcount.get(0) < 4) {
+        } else if (plcount.get(0) < 4) {
             p4layout.setVisibility(View.GONE);
             p5layout.setVisibility(View.GONE);
             p6layout.setVisibility(View.GONE);
-        }
-        else if (plcount.get(0) < 5) {
+        } else if (plcount.get(0) < 5) {
             p5layout.setVisibility(View.GONE);
             p6layout.setVisibility(View.GONE);
-        }
-        else if (plcount.get(0) < 6) {
+        } else if (plcount.get(0) < 6) {
             p6layout.setVisibility(View.GONE);
         } else {
             return;
@@ -155,65 +251,64 @@ public class MainActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(countDown, interval) {
             @Override
             public void onTick(long millisUntilFinished) {
-                textic.setText(String.format(Locale.getDefault(),"%s", Long.toString(millisUntilFinished/1000)));
+                textic.setText(String.format(Locale.getDefault(), "%s", Long.toString(millisUntilFinished / 1000)));
             }
 
             @Override
             public void onFinish() {
-                        if (set.size() < odds.size()) {
-                            textic.setText(String.format(Locale.getDefault(), "%s", ("Yas")));
-                            p1score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(0))));
-                            p2score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(1))));
-                            if (plcount.get(0) < 4 && plcount.get(0) > 2) {
-                                p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                            } else if (plcount.get(0) < 5 && plcount.get(0) > 3) {
-                                p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                                p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
-                            } else if (plcount.get(0) < 6 && plcount.get(0) > 4) {
-                                p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                                p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
-                                p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
-                            } else if (plcount.get(0) < 7 && plcount.get(0) > 5) {
-                                p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                                p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
-                                p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
-                                p6score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(5))));
-                            }
-                        }
-                            else {
-                                textic.setText(String.format(Locale.getDefault(), "%s", ("Nono")));
-                                p1score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(0))));
-                                p2score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(1))));
-                                if (plcount.get(0) < 4 && plcount.get(0) > 2) {
-                                    p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                                } else if (plcount.get(0) < 5 && plcount.get(0) > 3) {
-                                    p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                                    p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
-                                } else if (plcount.get(0) < 6 && plcount.get(0) > 4) {
-                                    p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                                    p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
-                                    p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
-                                } else if (plcount.get(0) < 7 && plcount.get(0) > 5) {
-                                    p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
-                                    p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
-                                    p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
-                                    p6score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(5))));
-                                }
+                if (set.size() < odds.size()) {
+                    textic.setText(String.format(Locale.getDefault(), "%s", ("Yas")));
+                    p1score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(0))));
+                    p2score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(1))));
+                    if (plcount.get(0) < 4 && plcount.get(0) > 2) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                    } else if (plcount.get(0) < 5 && plcount.get(0) > 3) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                        p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
+                    } else if (plcount.get(0) < 6 && plcount.get(0) > 4) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                        p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
+                        p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
+                    } else if (plcount.get(0) < 7 && plcount.get(0) > 5) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                        p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
+                        p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
+                        p6score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(5))));
+                    }
+                } else {
+                    textic.setText(String.format(Locale.getDefault(), "%s", ("Nono")));
+                    p1score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(0))));
+                    p2score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(1))));
+                    if (plcount.get(0) < 4 && plcount.get(0) > 2) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                    } else if (plcount.get(0) < 5 && plcount.get(0) > 3) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                        p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
+                    } else if (plcount.get(0) < 6 && plcount.get(0) > 4) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                        p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
+                        p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
+                    } else if (plcount.get(0) < 7 && plcount.get(0) > 5) {
+                        p3score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(2))));
+                        p4score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(3))));
+                        p5score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(4))));
+                        p6score.setText(String.format(Locale.getDefault(), "%s", Integer.valueOf(odds.get(5))));
+                    }
 
                 }
 
-                btnPlay.setText(String.format(Locale.getDefault(),"%s",("Reset")));
+                btnPlay.setText(String.format(Locale.getDefault(), "%s", ("Reset")));
             }
         };
 
-        textic.setText(String.format(Locale.getDefault(),"%s",Long.toString(countDown/1000)));
+        textic.setText(String.format(Locale.getDefault(), "%s", Long.toString(countDown / 1000)));
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(showFirst == true){
+                if (showFirst == true) {
                     countDownTimer.start();
                     showFirst = false;
-                }else {
+                } else {
                     myDialog.dismiss();
                     recreate();
                     showFirst = true;
@@ -223,9 +318,6 @@ public class MainActivity extends AppCompatActivity {
         });
         myDialog.show();
     }
-
-
-
 
 
 }
