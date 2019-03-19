@@ -25,23 +25,56 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     boolean showFirst = true;
-    int result;
     Dialog myDialog;
     EditText pcount;
     EditText p1editText;
     EditText p2editText;
     EditText p3editText;
-    EditText editText;
+    EditText p4editText;
+    EditText p5editText;
     ArrayList<Integer> plcount = new ArrayList<Integer>();
     ArrayList<Integer> odds = new ArrayList<Integer>();
-    int cc = 0;
-    int popc = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myDialog = new Dialog(this);
+
+        final AlertDialog.Builder p5builder = new AlertDialog.Builder(this);
+        p5builder.setTitle("Player 5");
+        p5builder.setIcon(R.drawable.ic_launcher_background);
+        p5builder.setMessage("Enter a Number");
+
+        p5editText = new EditText(this);
+        p5builder.setView(p5editText);
+
+        p5builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                odds.add(Integer.valueOf(p5editText.getText().toString()));
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog.Builder p4builder = new AlertDialog.Builder(this);
+        p4builder.setTitle("Player 4");
+        p4builder.setIcon(R.drawable.ic_launcher_background);
+        p4builder.setMessage("Enter a Number");
+
+        p4editText = new EditText(this);
+        p4builder.setView(p4editText);
+
+        p4builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                odds.add(Integer.valueOf(p4editText.getText().toString()));
+                if (plcount.get(0) < 6 && plcount.get(0) > 4) {
+                    p5builder.create().show();
+                }
+                dialog.dismiss();
+            }
+        });
 
         final AlertDialog.Builder p3builder = new AlertDialog.Builder(this);
         p3builder.setTitle("Player 3");
@@ -55,15 +88,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 odds.add(Integer.valueOf(p3editText.getText().toString()));
+                if (plcount.get(0) < 6 && plcount.get(0) > 3) {
+                    p4builder.create().show();
+                }
                 dialog.dismiss();
-            }
-        });
-
-        p3builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                recreate();
             }
         });
 
@@ -79,18 +107,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 odds.add(Integer.valueOf(p2editText.getText().toString()));
-                if (plcount.get(0) < 4 && plcount.get(0) > 2) {
+                if (plcount.get(0) < 6 && plcount.get(0) > 2) {
                     p3builder.create().show();
                 }
                 dialog.dismiss();
-            }
-        });
-
-        p2builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                recreate();
             }
         });
 
@@ -101,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
 
         p1editText = new EditText(this);
         builder.setView(p1editText);
+        p1editText.requestFocus();
+        //p1editText.getFocusable();
+
 
         builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
@@ -111,13 +134,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                recreate();
-            }
-        });
 
         AlertDialog.Builder builderpc = new AlertDialog.Builder(this);
         builderpc.setTitle("Number of Players");
@@ -135,13 +151,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        builderpc.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                recreate();
-            }
-        });
 
 
 
@@ -149,26 +158,6 @@ public class MainActivity extends AppCompatActivity {
         pc.show();
 
 
-
-        final Button button = findViewById(R.id.mainbtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cc = cc + 1;
-                if (cc == plcount.get(0)) {
-                    button.setVisibility(View.GONE);
-                    editText.setVisibility(View.GONE);
-                } else {
-                }
-
-                if (cc != plcount.get(0) + 1) {
-                    odds.add(Integer.valueOf(editText.getText().toString()));
-                    editText.setText("");
-                } else {
-                    editText.setText("");
-                }
-            }
-        });
 
         Button pbutton = findViewById(R.id.playbtn);
         pbutton.setOnClickListener(new View.OnClickListener() {
