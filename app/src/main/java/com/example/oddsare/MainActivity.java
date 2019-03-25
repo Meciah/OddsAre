@@ -77,12 +77,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final AlertDialog.Builder p3builder = new AlertDialog.Builder(this);
+        LinearLayout layout4 = new LinearLayout(this);
+        layout4.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params4 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params4.setMargins(300, 20, 300, 0);
+
+        p3editText = new EditText(this);
+        p3builder.setView(layout4);
+
+        layout4.addView(p3editText, params4);
         p3builder.setTitle("Player 3");
         p3builder.setIcon(R.drawable.ic_launcher_background);
         p3builder.setMessage("Enter a Number");
-
-        p3editText = new EditText(this);
-        p3builder.setView(p3editText);
 
         p3builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
@@ -96,12 +103,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final AlertDialog.Builder p2builder = new AlertDialog.Builder(this);
+        LinearLayout layout3 = new LinearLayout(this);
+        layout3.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params3.setMargins(300, 20, 300, 0);
+
+        p2editText = new EditText(this);
+        layout3.addView(p2editText, params3);
+
+        p2builder.setView(layout3);
         p2builder.setTitle("Player 2");
         p2builder.setIcon(R.drawable.ic_launcher_background);
         p2builder.setMessage("Enter a Number");
-
-        p2editText = new EditText(this);
-        p2builder.setView(p2editText);
 
         p2builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
@@ -115,15 +129,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LinearLayout layout2 = new LinearLayout(this);
+        layout2.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params2.setMargins(300, 20, 300, 0);
+
+        p1editText = new EditText(this);
+        layout2.addView(p1editText, params2);
+
+        builder.setView(layout2);
         builder.setTitle("Player 1");
         builder.setIcon(R.drawable.ic_launcher_background);
         builder.setMessage("Enter a Number");
-
-        p1editText = new EditText(this);
-        builder.setView(p1editText);
-        p1editText.requestFocus();
-        //p1editText.getFocusable();
-
 
         builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
@@ -136,11 +154,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         AlertDialog.Builder builderpc = new AlertDialog.Builder(this);
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(300, 20, 300, 0);
+
+        pcount = new EditText(this);
+        layout.addView(pcount, params);
+
+        builderpc.setView(layout);
         builderpc.setTitle("Number of Players");
         builderpc.setIcon(R.drawable.ic_launcher_background);
-        builderpc.setMessage("2-5");
-        pcount = new EditText(this);
-        builderpc.setView(pcount);
+        builderpc.setMessage("Enter number of players 2-5");
 
         builderpc.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
@@ -164,7 +190,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ShowPopup(v);
-                //ArrayList<Integer> result = new ArrayList<>(set);
+            }
+        });
+
+        Button sbutton = findViewById(R.id.startbtn);
+        sbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
