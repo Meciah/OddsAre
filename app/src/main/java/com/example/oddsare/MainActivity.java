@@ -340,8 +340,6 @@ public class MainActivity extends AppCompatActivity {
         });
         myDialog.show();
     }
-
-
 }
 
 
