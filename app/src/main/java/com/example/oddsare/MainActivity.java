@@ -42,12 +42,19 @@ public class MainActivity extends AppCompatActivity {
         myDialog = new Dialog(this);
 
         final AlertDialog.Builder p5builder = new AlertDialog.Builder(this);
+        LinearLayout layout6 = new LinearLayout(this);
+        layout6.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params6 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params6.setMargins(300, 20, 300, 0);
+
+        p5editText = new EditText(this);
+        p5builder.setView(layout6);
+
+        layout6.addView(p5editText, params6);
         p5builder.setTitle("Player 5");
         p5builder.setIcon(R.drawable.ic_launcher_background);
         p5builder.setMessage("Enter a Number");
-
-        p5editText = new EditText(this);
-        p5builder.setView(p5editText);
 
         p5builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
@@ -58,19 +65,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final AlertDialog.Builder p4builder = new AlertDialog.Builder(this);
+        LinearLayout layout5 = new LinearLayout(this);
+        layout5.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params5 = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params5.setMargins(300, 20, 300, 0);
+
+        p4editText = new EditText(this);
+        p4builder.setView(layout5);
+
+        final AlertDialog p5 = p5builder.create();
+        layout5.addView(p4editText, params5);
         p4builder.setTitle("Player 4");
         p4builder.setIcon(R.drawable.ic_launcher_background);
         p4builder.setMessage("Enter a Number");
-
-        p4editText = new EditText(this);
-        p4builder.setView(p4editText);
 
         p4builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 odds.add(Integer.valueOf(p4editText.getText().toString()));
                 if (plcount.get(0) < 6 && plcount.get(0) > 4) {
-                    p5builder.create().show();
+                    p5.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                    p5.show();
                 }
                 dialog.dismiss();
             }
@@ -86,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         p3editText = new EditText(this);
         p3builder.setView(layout4);
 
+        final AlertDialog p4 = p4builder.create();
         layout4.addView(p3editText, params4);
         p3builder.setTitle("Player 3");
         p3builder.setIcon(R.drawable.ic_launcher_background);
@@ -96,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 odds.add(Integer.valueOf(p3editText.getText().toString()));
                 if (plcount.get(0) < 6 && plcount.get(0) > 3) {
-                    p4builder.create().show();
+                    p4.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                    p4.show();
                 }
                 dialog.dismiss();
             }
@@ -112,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         p2editText = new EditText(this);
         layout3.addView(p2editText, params3);
 
+        final AlertDialog p3 = p3builder.create();
         p2builder.setView(layout3);
         p2builder.setTitle("Player 2");
         p2builder.setIcon(R.drawable.ic_launcher_background);
@@ -122,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 odds.add(Integer.valueOf(p2editText.getText().toString()));
                 if (plcount.get(0) < 6 && plcount.get(0) > 2) {
-                    p3builder.create().show();
+                    p3.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                    p3.show();
                 }
                 dialog.dismiss();
             }
@@ -131,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LinearLayout layout2 = new LinearLayout(this);
         layout2.setOrientation(LinearLayout.VERTICAL);
+        //layout2.setBackgroundResource(android.R.color.background_dark);
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params2.setMargins(300, 20, 300, 0);
@@ -138,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         p1editText = new EditText(this);
         layout2.addView(p1editText, params2);
 
+        final AlertDialog p2 = p2builder.create();
         builder.setView(layout2);
         builder.setTitle("Player 1");
         builder.setIcon(R.drawable.ic_launcher_background);
@@ -147,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 odds.add(Integer.valueOf(p1editText.getText().toString()));
-                p2builder.create().show();
+                p2.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                p2.show();
                 dialog.dismiss();
             }
         });
@@ -163,16 +186,17 @@ public class MainActivity extends AppCompatActivity {
         pcount = new EditText(this);
         layout.addView(pcount, params);
 
+        final AlertDialog p1 = builder.create();
         builderpc.setView(layout);
         builderpc.setTitle("Number of Players");
         builderpc.setIcon(R.drawable.ic_launcher_background);
         builderpc.setMessage("Enter number of players 2-5");
-
         builderpc.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 plcount.add(Integer.valueOf(pcount.getText().toString()));
-                builder.create().show();
+                p1.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                p1.show();
                 dialog.dismiss();
             }
         });
@@ -181,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AlertDialog pc = builderpc.create();
+        pc.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
         pc.show();
 
 
