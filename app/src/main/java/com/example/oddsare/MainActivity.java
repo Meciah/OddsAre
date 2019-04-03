@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myDialog = new Dialog(this);
 
-        final AlertDialog.Builder p5builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder p5builder = new AlertDialog.Builder(this, R.style.AlertDialog);
         LinearLayout layout6 = new LinearLayout(this);
         layout6.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params6 = new LinearLayout.LayoutParams(
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final AlertDialog.Builder p4builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder p4builder = new AlertDialog.Builder(this, R.style.AlertDialog);
         LinearLayout layout5 = new LinearLayout(this);
         layout5.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params5 = new LinearLayout.LayoutParams(
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final AlertDialog.Builder p3builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder p3builder = new AlertDialog.Builder(this, R.style.AlertDialog);
         LinearLayout layout4 = new LinearLayout(this);
         layout4.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params4 = new LinearLayout.LayoutParams(
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final AlertDialog.Builder p2builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder p2builder = new AlertDialog.Builder(this, R.style.AlertDialog);
         LinearLayout layout3 = new LinearLayout(this);
         layout3.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialog);
         LinearLayout layout2 = new LinearLayout(this);
         layout2.setOrientation(LinearLayout.VERTICAL);
         //layout2.setBackgroundResource(android.R.color.background_dark);
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        AlertDialog.Builder builderpc = new AlertDialog.Builder(this);
+        AlertDialog.Builder builderpc = new AlertDialog.Builder(this, R.style.AlertDialog);
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -228,12 +228,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-    private void showToast(String text) {
-        Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-    }
-
 
     public void ShowPopup(View v) {
         final HashSet<Integer> set = new HashSet<Integer>(odds);
