@@ -15,8 +15,8 @@
 
     <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
         <item name="android:textColor">#A52B7B</item>
-        <item name="android:textColorPrimary">#595959</item>
-        <item name="android:colorAccent">#1b5e20</item>
+        <item name="android:textColorPrimary">#DAFCFF</item>
+        <item name="android:colorAccent">#EDF1ED</item>
     </style>
 
 
