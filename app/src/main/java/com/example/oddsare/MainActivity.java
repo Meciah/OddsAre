@@ -25,6 +25,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     boolean showFirst = true;
+    boolean startpopups = false;
     Dialog myDialog;
     EditText pcount;
     EditText p1editText;
@@ -41,172 +42,199 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myDialog = new Dialog(this);
 
-        final AlertDialog.Builder p5builder = new AlertDialog.Builder(this);
-        LinearLayout layout6 = new LinearLayout(this);
-        layout6.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params6 = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params6.setMargins(300, 20, 300, 0);
 
-        p5editText = new EditText(this);
-        p5builder.setView(layout6);
 
-        layout6.addView(p5editText, params6);
-        p5builder.setTitle("Player 5");
-        p5builder.setIcon(R.drawable.ic_launcher_background);
-        p5builder.setMessage("Enter a Number");
+            final AlertDialog.Builder p5builder = new AlertDialog.Builder(this, R.style.AlertDialog);
+            LinearLayout layout6 = new LinearLayout(this);
+            layout6.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params6 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params6.setMargins(300, 20, 300, 0);
 
-        p5builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                odds.add(Integer.valueOf(p5editText.getText().toString()));
-                dialog.dismiss();
-            }
-        });
+            p5editText = new EditText(this);
+            p5builder.setView(layout6);
+            p5editText.setTextColor(getResources().getColor(android.R.color.white));
 
-        final AlertDialog.Builder p4builder = new AlertDialog.Builder(this);
-        LinearLayout layout5 = new LinearLayout(this);
-        layout5.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params5 = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params5.setMargins(300, 20, 300, 0);
+            layout6.addView(p5editText, params6);
+            p5builder.setTitle("Player 5");
+            p5builder.setCancelable(false);
+            p5builder.setIcon(R.drawable.ic_launcher_background);
+            p5builder.setMessage("Enter a Number");
 
-        p4editText = new EditText(this);
-        p4builder.setView(layout5);
-
-        final AlertDialog p5 = p5builder.create();
-        layout5.addView(p4editText, params5);
-        p4builder.setTitle("Player 4");
-        p4builder.setIcon(R.drawable.ic_launcher_background);
-        p4builder.setMessage("Enter a Number");
-
-        p4builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                odds.add(Integer.valueOf(p4editText.getText().toString()));
-                if (plcount.get(0) < 6 && plcount.get(0) > 4) {
-                    p5.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
-                    p5.show();
+            p5builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    odds.add(Integer.valueOf(p5editText.getText().toString()));
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
-            }
-        });
+            });
 
-        final AlertDialog.Builder p3builder = new AlertDialog.Builder(this);
-        LinearLayout layout4 = new LinearLayout(this);
-        layout4.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params4 = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params4.setMargins(300, 20, 300, 0);
+            final AlertDialog.Builder p4builder = new AlertDialog.Builder(this, R.style.AlertDialog);
+            LinearLayout layout5 = new LinearLayout(this);
+            layout5.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params5 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params5.setMargins(300, 20, 300, 0);
 
-        p3editText = new EditText(this);
-        p3builder.setView(layout4);
+            p4editText = new EditText(this);
+            p4builder.setView(layout5);
+            p4editText.setTextColor(getResources().getColor(android.R.color.white));
 
-        final AlertDialog p4 = p4builder.create();
-        layout4.addView(p3editText, params4);
-        p3builder.setTitle("Player 3");
-        p3builder.setIcon(R.drawable.ic_launcher_background);
-        p3builder.setMessage("Enter a Number");
+            final AlertDialog p5 = p5builder.create();
+            layout5.addView(p4editText, params5);
+            p4builder.setTitle("Player 4");
+            p4builder.setCancelable(false);
+            p4builder.setIcon(R.drawable.ic_launcher_background);
+            p4builder.setMessage("Enter a Number");
 
-        p3builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                odds.add(Integer.valueOf(p3editText.getText().toString()));
-                if (plcount.get(0) < 6 && plcount.get(0) > 3) {
-                    p4.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
-                    p4.show();
+            p4builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    odds.add(Integer.valueOf(p4editText.getText().toString()));
+                    if (plcount.get(0) < 6 && plcount.get(0) > 4) {
+                        p5.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                        p5.setCanceledOnTouchOutside(false);
+                        p5.show();
+                    }
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
-            }
-        });
+            });
 
-        final AlertDialog.Builder p2builder = new AlertDialog.Builder(this);
-        LinearLayout layout3 = new LinearLayout(this);
-        layout3.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params3.setMargins(300, 20, 300, 0);
+            final AlertDialog.Builder p3builder = new AlertDialog.Builder(this, R.style.AlertDialog);
+            LinearLayout layout4 = new LinearLayout(this);
+            layout4.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params4 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params4.setMargins(300, 20, 300, 0);
 
-        p2editText = new EditText(this);
-        layout3.addView(p2editText, params3);
+            p3editText = new EditText(this);
+            p3builder.setView(layout4);
+            p3editText.setTextColor(getResources().getColor(android.R.color.white));
 
-        final AlertDialog p3 = p3builder.create();
-        p2builder.setView(layout3);
-        p2builder.setTitle("Player 2");
-        p2builder.setIcon(R.drawable.ic_launcher_background);
-        p2builder.setMessage("Enter a Number");
+            final AlertDialog p4 = p4builder.create();
+            layout4.addView(p3editText, params4);
+            p3builder.setTitle("Player 3");
+            p3builder.setCancelable(false);
+            p3builder.setIcon(R.drawable.ic_launcher_background);
+            p3builder.setMessage("Enter a Number");
 
-        p2builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                odds.add(Integer.valueOf(p2editText.getText().toString()));
-                if (plcount.get(0) < 6 && plcount.get(0) > 2) {
-                    p3.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
-                    p3.show();
+            p3builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    odds.add(Integer.valueOf(p3editText.getText().toString()));
+                    if (plcount.get(0) < 6 && plcount.get(0) > 3) {
+                        p4.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                        p4.setCanceledOnTouchOutside(false);
+                        p4.show();
+                    }
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
-            }
-        });
+            });
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LinearLayout layout2 = new LinearLayout(this);
-        layout2.setOrientation(LinearLayout.VERTICAL);
-        //layout2.setBackgroundResource(android.R.color.background_dark);
-        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params2.setMargins(300, 20, 300, 0);
+            final AlertDialog.Builder p2builder = new AlertDialog.Builder(this, R.style.AlertDialog);
+            LinearLayout layout3 = new LinearLayout(this);
+            layout3.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params3.setMargins(300, 20, 300, 0);
 
-        p1editText = new EditText(this);
-        layout2.addView(p1editText, params2);
+            p2editText = new EditText(this);
+            layout3.addView(p2editText, params3);
+            p2editText.setTextColor(getResources().getColor(android.R.color.white));
 
-        final AlertDialog p2 = p2builder.create();
-        builder.setView(layout2);
-        builder.setTitle("Player 1");
-        builder.setIcon(R.drawable.ic_launcher_background);
-        builder.setMessage("Enter a Number");
+            final AlertDialog p3 = p3builder.create();
+            p2builder.setView(layout3);
+            p2builder.setTitle("Player 2");
+            p2builder.setCancelable(false);
+            p2builder.setIcon(R.drawable.ic_launcher_background);
+            p2builder.setMessage("Enter a Number");
 
-        builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+            p2builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    odds.add(Integer.valueOf(p2editText.getText().toString()));
+                    if (plcount.get(0) < 6 && plcount.get(0) > 2) {
+                        p3.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                        p3.setCanceledOnTouchOutside(false);
+                        p3.show();
+                    }
+                    dialog.dismiss();
+                }
+            });
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialog);
+            LinearLayout layout2 = new LinearLayout(this);
+            layout2.setOrientation(LinearLayout.VERTICAL);
+            //layout2.setBackgroundResource(android.R.color.background_dark);
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params2.setMargins(600, 50, 400, 0);
+
+            p1editText = new EditText(this);
+            layout2.addView(p1editText, params2);
+            p1editText.setTextColor(getResources().getColor(android.R.color.white));
+
+            final AlertDialog p2 = p2builder.create();
+            builder.setView(layout2);
+            builder.setTitle("Player 1");
+            builder.setCancelable(false);
+            builder.setIcon(R.drawable.ic_launcher_background);
+            builder.setMessage("Enter a Number");
+
+            builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    odds.add(Integer.valueOf(p1editText.getText().toString()));
+                    p2.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                    p2.setCanceledOnTouchOutside(false);
+                    p2.show();
+                    dialog.dismiss();
+                }
+            });
+
+
+
+
+            final AlertDialog.Builder builderpc = new AlertDialog.Builder(this, R.style.AlertDialog);
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(300, 20, 300, 0);
+
+            pcount = new EditText(this);
+            layout.addView(pcount, params);
+            pcount.setTextColor(getResources().getColor(android.R.color.white));
+
+            final AlertDialog p1 = builder.create();
+            builderpc.setView(layout);
+            builderpc.setTitle("Number of Players");
+            builderpc.setCancelable(false);
+            builderpc.setIcon(R.drawable.ic_launcher_background);
+            builderpc.setMessage("Enter number of players 2-5");
+            builderpc.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    plcount.add(Integer.valueOf(pcount.getText().toString()));
+                    p1.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                    p1.setCanceledOnTouchOutside(false);
+                    p1.show();
+                    dialog.dismiss();
+                }
+            });
+
+        Button sbutton = findViewById(R.id.startbtn);
+        sbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                odds.add(Integer.valueOf(p1editText.getText().toString()));
-                p2.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
-                p2.show();
-                dialog.dismiss();
+            public void onClick(View v) {
+                AlertDialog pc = builderpc.create();
+                pc.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
+                pc.setCanceledOnTouchOutside(false);
+                pc.show();
             }
         });
 
 
-        AlertDialog.Builder builderpc = new AlertDialog.Builder(this);
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(300, 20, 300, 0);
-
-        pcount = new EditText(this);
-        layout.addView(pcount, params);
-
-        final AlertDialog p1 = builder.create();
-        builderpc.setView(layout);
-        builderpc.setTitle("Number of Players");
-        builderpc.setIcon(R.drawable.ic_launcher_background);
-        builderpc.setMessage("Enter number of players 2-5");
-        builderpc.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                plcount.add(Integer.valueOf(pcount.getText().toString()));
-                p1.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
-                p1.show();
-                dialog.dismiss();
-            }
-        });
-
-
-
-
-        AlertDialog pc = builderpc.create();
-        pc.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);
-        pc.show();
 
 
 
@@ -218,22 +246,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button sbutton = findViewById(R.id.startbtn);
-        sbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
 
     }
-
-
-    private void showToast(String text) {
-        Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
-    }
-
 
     public void ShowPopup(View v) {
         final HashSet<Integer> set = new HashSet<Integer>(odds);
