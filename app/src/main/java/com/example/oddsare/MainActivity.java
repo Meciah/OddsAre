@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -205,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
             pcount = new EditText(this);
             layout.addView(pcount, params);
             pcount.setTextColor(getResources().getColor(android.R.color.white));
+            pcount.setFilters(new InputFilter[]{new InputFilterMinMax("1", "12")});
 
             final AlertDialog p1 = builder.create();
             builderpc.setView(layout);
