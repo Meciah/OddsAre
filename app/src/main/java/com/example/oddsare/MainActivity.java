@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,7 +27,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     boolean showFirst = true;
-    boolean startpopups = false;
     Dialog myDialog;
     EditText pcount;
     EditText p1editText;
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myDialog = new Dialog(this);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
 
@@ -54,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
 
             p5editText = new EditText(this);
             p5builder.setView(layout6);
+            p5editText.setWidth(240);
             p5editText.setTextColor(getResources().getColor(android.R.color.white));
+            p5editText.setFilters(new InputFilter[]{new InputFilterMinMax("1", "100")});
 
             layout6.addView(p5editText, params6);
             p5builder.setTitle("Player 5");
             p5builder.setCancelable(false);
-            p5builder.setIcon(R.drawable.ic_launcher_background);
+            p5builder.setIcon(R.drawable.oa);
             p5builder.setMessage("Enter a Number");
 
             p5builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
@@ -79,13 +82,15 @@ public class MainActivity extends AppCompatActivity {
 
             p4editText = new EditText(this);
             p4builder.setView(layout5);
+            p4editText.setWidth(240);
             p4editText.setTextColor(getResources().getColor(android.R.color.white));
+            p4editText.setFilters(new InputFilter[]{new InputFilterMinMax("1", "100")});
 
             final AlertDialog p5 = p5builder.create();
             layout5.addView(p4editText, params5);
             p4builder.setTitle("Player 4");
             p4builder.setCancelable(false);
-            p4builder.setIcon(R.drawable.ic_launcher_background);
+            p4builder.setIcon(R.drawable.oa);
             p4builder.setMessage("Enter a Number");
 
             p4builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
@@ -110,13 +115,15 @@ public class MainActivity extends AppCompatActivity {
 
             p3editText = new EditText(this);
             p3builder.setView(layout4);
+            p3editText.setWidth(240);
             p3editText.setTextColor(getResources().getColor(android.R.color.white));
+            p3editText.setFilters(new InputFilter[]{new InputFilterMinMax("1", "100")});
 
             final AlertDialog p4 = p4builder.create();
             layout4.addView(p3editText, params4);
             p3builder.setTitle("Player 3");
             p3builder.setCancelable(false);
-            p3builder.setIcon(R.drawable.ic_launcher_background);
+            p3builder.setIcon(R.drawable.oa);
             p3builder.setMessage("Enter a Number");
 
             p3builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
@@ -141,13 +148,15 @@ public class MainActivity extends AppCompatActivity {
 
             p2editText = new EditText(this);
             layout3.addView(p2editText, params3);
+            p2editText.setWidth(240);
             p2editText.setTextColor(getResources().getColor(android.R.color.white));
+            p2editText.setFilters(new InputFilter[]{new InputFilterMinMax("1", "100")});
 
             final AlertDialog p3 = p3builder.create();
             p2builder.setView(layout3);
             p2builder.setTitle("Player 2");
             p2builder.setCancelable(false);
-            p2builder.setIcon(R.drawable.ic_launcher_background);
+            p2builder.setIcon(R.drawable.oa);
             p2builder.setMessage("Enter a Number");
 
             p2builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
@@ -169,17 +178,19 @@ public class MainActivity extends AppCompatActivity {
             //layout2.setBackgroundResource(android.R.color.background_dark);
             LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params2.setMargins(600, 50, 400, 0);
+            params2.setMargins(300, 20, 300, 0);
 
             p1editText = new EditText(this);
             layout2.addView(p1editText, params2);
+            p1editText.setWidth(240);
             p1editText.setTextColor(getResources().getColor(android.R.color.white));
+            p1editText.setFilters(new InputFilter[]{new InputFilterMinMax("1", "100")});
 
             final AlertDialog p2 = p2builder.create();
             builder.setView(layout2);
             builder.setTitle("Player 1");
             builder.setCancelable(false);
-            builder.setIcon(R.drawable.ic_launcher_background);
+            builder.setIcon(R.drawable.oa);
             builder.setMessage("Enter a Number");
 
             builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
@@ -205,15 +216,16 @@ public class MainActivity extends AppCompatActivity {
 
             pcount = new EditText(this);
             layout.addView(pcount, params);
+            pcount.setWidth(240);
             pcount.setTextColor(getResources().getColor(android.R.color.white));
-            pcount.setFilters(new InputFilter[]{new InputFilterMinMax("1", "12")});
+            pcount.setFilters(new InputFilter[]{new InputFilterMinMax("2", "5")});
 
             final AlertDialog p1 = builder.create();
             builderpc.setView(layout);
             builderpc.setTitle("Number of Players");
             builderpc.setCancelable(false);
-            builderpc.setIcon(R.drawable.ic_launcher_background);
-            builderpc.setMessage("Enter number of players 2-5");
+            builderpc.setIcon(R.drawable.oa);
+            builderpc.setMessage("Player Limit 2-5");
             builderpc.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

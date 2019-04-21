@@ -30,4 +30,4 @@ public class InputFilterMinMax implements InputFilter {
         return b > a ? c >= a && c <= b : c >= b && c <= a;
     }
 }
-}
+
